@@ -41,7 +41,8 @@ const GlobalStyles = createGlobalStyle`
   --wa-black: #000000;
   --wa-light-gray: #F5F6F6;
   --wa-gray: #f4f5f5ff;
-  --wa-medium-gray: #C4C4C4;
+  --wa-medium-gray: #D4D4D4;
+  --wa-medium-50-gray: #e4e4e4;
   --wa-dark-gray: #3C424A;
 
   /* Shadows & Overlays */
@@ -89,6 +90,20 @@ body {
   color: var(--wa-text-primary-light)
 }
 
+.active {
+    background-color: var(--wa-medium-50-gray);
+}
+
+.active::after {
+    content: "";
+    padding: 1px;
+    background-color: var(--wa-teal-green);
+    width: 2.5px;
+    border-radius: 10px;
+    height: 50%;
+    position: absolute;
+    top: 10px;
+}
 input,
 button,
 textarea,

@@ -1,7 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import ChatPage from "./pages/ChatPage";
-import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
@@ -17,8 +16,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<AppLayout />}>
-            <Route index element={<Navigate replace to="home" />} />
-            <Route path="home" element={<Home />} />
+            <Route index element={<Navigate replace to="chatpage" />} />
             <Route path="chatpage" element={<ChatPage />} />
             <Route path="login" element={<Login />} />
             <Route path="notFound" element={<NotFound />} />

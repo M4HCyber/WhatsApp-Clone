@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import Button from "./Button";
+import NavItem from "./NavItem";
 import {
   HiBars3,
   HiOutlineChatBubbleOvalLeftEllipsis,
@@ -13,25 +14,19 @@ import {
 } from "react-icons/hi2";
 import { RiInfinityLine } from "react-icons/ri";
 import { HiOutlineArchive } from "react-icons/hi";
+import useNav from "../hooks/useNav";
 const StyledNavLinks = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
   justify-content: space-between;
-  padding: 3rem 1.2rem;
-  width: fit-content;
+  padding: 1.5rem 0.2rem 0rem;
+  /* width: fit-content; */
 `;
 const NavGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-`;
-
-const NavItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  font-size: 1.3rem;
+  gap: 0.5rem;
 `;
 
 const HorizontalRow = styled.div`
@@ -40,82 +35,43 @@ const HorizontalRow = styled.div`
 `;
 
 export default function NavLinks() {
+  const [setIsOpen] = useNav();
   return (
     <StyledNavLinks>
       <NavGroup>
-        <div>
-          <Button>
-            <HiBars3 />
-          </Button>
-        </div>
-        <NavLink to="messages">
-          <NavItem>
-            <Button>
-              <HiOutlineChatBubbleOvalLeftEllipsis />
-            </Button>
-            <span>Chats</span>
-          </NavItem>
-        </NavLink>
-        <NavLink to="">
-          <NavItem>
-            <Button>
-              <HiOutlinePhone />
-            </Button>
-            <span>Calls</span>
-          </NavItem>
-        </NavLink>
-        <NavLink to="">
-          <NavItem>
-            <Button>
-              <HiOutlinePlusCircle />
-            </Button>
-            <span>Status</span>
-          </NavItem>
-        </NavLink>
+        <Button>
+          <HiBars3 />
+        </Button>
+        {/* <NavItem
+          icon={<HiBars3 />}
+          onClick={() => setIsOpen((prev: boolean) => !prev)}
+        /> */}
+        <NavItem
+          label="Chat"
+          icon={<HiOutlineChatBubbleOvalLeftEllipsis />}
+          to="chatpage"
+          numMessages={129}
+        />
+        <NavItem label="Calls" icon={<HiOutlinePhone />} to="" />
+        <NavItem label="Status" icon={<HiOutlinePlusCircle />} to="status" />
+
         <HorizontalRow />
-        <NavLink to="">
-          <NavItem>
-            <Button>
-              <RiInfinityLine />
-            </Button>
-            <span>Meta AI</span>
-          </NavItem>
-        </NavLink>
+        <NavItem label="Meta AI" icon={<RiInfinityLine />} to="status" />
       </NavGroup>
       <NavGroup>
-        <NavLink to="">
-          <NavItem>
-            <Button>
-              <HiOutlineStar />
-            </Button>
-            <span>Starred Messages</span>
-          </NavItem>
-        </NavLink>
-        <NavLink to="">
-          <NavItem>
-            <Button>
-              <HiOutlineArchive />
-            </Button>
-            <span>Achieved chats</span>
-          </NavItem>
-        </NavLink>
+        <NavItem
+          label="Starred messages"
+          icon={<HiOutlineStar />}
+          to="starredMessages"
+        />
+        <NavItem
+          label="Achieved chats"
+          icon={<HiOutlineArchive />}
+          to="achivedchats"
+        />
         <HorizontalRow />
-        <NavLink to="">
-          <NavItem>
-            <Button>
-              <HiOutlineCog6Tooth />
-            </Button>
-            <span>Settings</span>
-          </NavItem>
-        </NavLink>
-        <NavLink to="">
-          <NavItem>
-            <Button>
-              <HiOutlineUserCircle />
-            </Button>
-            <span>Profile</span>
-          </NavItem>
-        </NavLink>
+        <NavItem label="Settings" icon={<HiOutlineCog6Tooth />} to="settings" />
+        <NavItem label="Profile" icon={<HiOutlineUserCircle />} to="profile" />
       </NavGroup>
     </StyledNavLinks>
   );

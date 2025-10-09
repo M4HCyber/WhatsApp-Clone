@@ -1,11 +1,13 @@
 import styled, { css } from "styled-components";
+import React from "react";
 
 const variations = {
   parimary: css`
     color: blue;
   `,
 };
-const sizes: string = {
+
+const sizes = {
   small: css`
     font-size: 1.5rem;
   `,
@@ -13,17 +15,32 @@ const sizes: string = {
     font-size: 2rem;
   `,
   large: css`
-    font-size: 2.5rem;
+    font-size: 10rem;
   `,
 };
-const StyledButton = styled.button`
+
+type StyledButtonProps = {
+  size?: "small" | "medium" | "large";
+  variant?: "primary";
+};
+const StyledButton = styled.button<StyledButtonProps>`
   outline: none;
   border: none;
   font-size: 2rem;
   background-color: transparent;
   ${(props) => sizes[props.size]}
+  ${(props) => variations[props.variant]}
 `;
 
-export default function Button({ children }) {
-  return <StyledButton>{children}</StyledButton>;
+type ButtonProps = React.PropsWithChildren<StyledButtonProps>;
+export default function Button({
+  children,
+  size = "medium",
+  variant = "primary",
+}: ButtonProps) {
+  return (
+    <StyledButton size={size} variant={variant}>
+      {children}
+    </StyledButton>
+  );
 }
